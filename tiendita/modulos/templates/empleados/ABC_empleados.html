@@ -1,0 +1,119 @@
+{% extends "home/index.html"%}
+{% block encabezado %}
+    {% if cdx.tipo == 'alta' %}
+    <h1 class="w3-text-white w3-center" style="text-shadow:3px 3px 0 #444">
+        <b>Crear nuevo empleado</b></h1>
+    {% elif cdx.tipo == 'baja' %}
+    <h1 class="w3-text-white w3-center" style="text-shadow:3px 3px 0 #444">
+        <b>Borrar empleado</b></h1>
+    {% elif cdx.tipo == 'cambio' %}
+    <h1 class="w3-text-white w3-center" style="text-shadow:3px 3px 0 #444">
+        <b>Editar empleado</b></h1>
+    {% else %}
+    <h1>ERORR</h1>
+    {% endif %}
+    {% endblock %}
+
+
+{% block cuerpo %}
+    <form class="we-container w3-card-4
+{% if cdx.tipo == 'alta' %}
+    w3-green
+    {% elif cdx.tipo == 'baja' %}
+    w3-red
+    {% elif cdx.tipo == 'cambio' %}
+    w3-indigo
+    {% else %}
+    w3-black
+    {% endif %}
+" method="POST">
+        <div class="w3-row-padding">
+  <div class="w3-third">
+      <label for="nombre">Nombre:</label>
+    <input name="nombre"
+           id="nombre"
+           class="w3-input w3-border"
+           type="text"
+           {% if tipo != 'alta' %}
+           value="{{ cdx.empleado.nombre }}"
+           {% endif %}
+           placeholder="Nombre">
+  </div>
+  <div class="w3-third">
+     <label for="Apellido">Apellido:</label>
+    <input name="apellido" id="apellido" class="w3-input w3-border" type="text"
+           {% if tipo != 'alta' %}
+           value="{{ cdx.empleado.apellido }}"
+           {% endif %}
+           placeholder="Apellido">
+  </div>
+  <div class="w3-third">
+      <label for="sexo">Sexo:</label>
+    <p></p>
+  <input class="w3-radio" id ="id_hombre" type="radio" name="sexo" value=1
+  {% if cdx.empleado.sexo == 'H' %}
+          checked
+  {% endif %}
+  >
+  <label for="id_hombre"> Hombre</label>
+
+  <input class="w3-radio" id ="id_mujer" type="radio" name="sexo" value=2
+  {% if cdx.empleado.sexo == 'M' %}
+          checked
+  {% endif %}
+  >
+  <label for="id_mujer">Mujer</label>
+
+  <input class="w3-radio" id="id_decepticon" type="radio" name="sexo" value=3
+  {% if cdx.empleado.sexo == 'Decepticon' %}
+          checked
+  {% endif %}
+  >
+  <label for="id_decepticon">Prefiero no decirlo</label>
+  </div>
+  <div class="w3-third">
+        <label for="edad">Edad:</label>
+    <input name="edad" id="edad" class="w3-input w3-border" type="numbre"
+           {% if tipo != 'alta' %}
+           value="{{ cdx.empleado.edad }}"
+           {% endif %}
+           placeholder="Edad">
+  </div>
+  <div class="w3-third">
+        <label for="puesto">Puesto:</label>
+    <input name="puesto" id="puesto" class="w3-input w3-border" type="text"
+           {% if tipo != 'alta' %}
+           value="{{ cdx.empleado.puesto }}"
+           {% endif %}
+           placeholder="Puesto">
+  </div>
+  <div class="w3-third">
+        <label for="salario">Salario:</label>
+    <input name="salario" id="salario" class="w3-input w3-border" type="text"
+           {% if tipo != 'alta' %}
+           value="{{ cdx.empleado.salario | formato_moneda}}"
+           {% endif %}
+           placeholder="Salario">
+  </div>
+  <div class="w3-twothird">
+        <label for="comentarios">Comentarios:</label>
+    <input name="comentarios" id="comentarios" class="w3-input w3-border" type="text"
+           {% if tipo != 'alta' %}
+           value="{{ cdx.empleado.comentarios }}"
+           {% endif %}
+           placeholder="comentarios">
+  </div>
+
+
+</div>
+    <button class="w3-button w3-section w3-blue w3-ripple w3-padding" >
+        {% if cdx.tipo == 'alta' %}
+        Agregar
+        {% elif cdx.tipo == 'baja' %}
+        Borrar
+        {% elif cdx.tipo == 'cambio' %}
+        Cambiar
+        {% endif %}
+    </button>
+    </form>
+{% endblock %}

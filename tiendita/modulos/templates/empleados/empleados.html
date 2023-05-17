@@ -1,0 +1,43 @@
+{% extends "home/index.html"%}
+{% block encabezado %}
+    <h1 class="w3-text-white w3-center" style="text-shadow:3px 3px 0 #444">
+        <b>Empleados</b> <a href="{{ url_for('empleados.alta') }}">
+        <button class="w3-button w3-circle w3-purple w3-xlarge">+</button></a></h1>
+    {% endblock %}
+{% block cuerpo %}
+    <div class="w3-responsive">
+    <table class="w3-table-all w3-hoverable">
+    <thead>
+      <tr class="w3-light-grey">
+          <th class="w3-center">Borrar</th>
+          <th class="w3-center">Editar</th>
+        <th>Nombre</th>
+        <th>Apellido</th>
+        <th>Sexo</th>
+        <th>Edad</th>
+          <th>Puesto</th>
+          <th>Salario</th>
+          <th>Comentarios</th>
+      </tr>
+    </thead>
+        {% for empleado in cdx.empleados %}
+    <tr>
+      <td class="w3-center"><a href="{{ url_for('empleados.baja',id=empleado.id) }}">
+          <image src="https://img.icons8.com/ios-filled/66/000000/delete-sign--v1.png"> </image></a> </td>
+
+        <td class="w3-center"><a href="{{ url_for('empleados.cambio',id=empleado.id) }}">
+          <image src="https://img.icons8.com/material-rounded/66/000000/edit--v1.png"></image></a> </td>
+        <td>{{ empleado.nombre }}</td>
+      <td>{{ empleado.apellido }}</td>
+      <td>{{ empleado.sexo | replace("H","Hombre")|replace("M","Mujer") }}</td>
+        <td>{{ empleado.edad }}</td>
+        <td>{{ empleado.puesto | default("Suplente",true)}}</td>
+        <td>{{ empleado.salario | formato_moneda}}</td>
+    <td><a href="{{ url_for('empleados.comentarios',id=empleado.id) }}"> ver comentarios</a></td>
+
+    </tr>
+        {% endfor %}
+  </table>
+
+    </div>
+    {% endblock %}

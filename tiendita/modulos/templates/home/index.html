@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<title>W3.CSS</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<body>
+
+<div class="w3-sidebar w3-indigo w3-bar-block w3-card w3-animate-left" style="display:none" id="mySidebar">
+  <button class="w3-bar-item w3-button w3-large"
+  onclick="w3_close()">Cerrar &times;</button>
+    <a href="/" class="w3-bar-item w3-button">Principal</a>
+  <a href="#" class="w3-bar-item w3-button">Productos</a>
+    <a href="/puestos" class="w3-bar-item w3-button">Puestos</a>
+  <a href="/empleados" class="w3-bar-item w3-button">Empleados</a>
+  <a href="#" onclick="document.getElementById('id01').style.display='block'" class="w3-bar-item w3-button">Ver más</a>
+</div>
+
+<div id="main">
+
+<div class="w3-red">
+  <button id="openNav" class="w3-button w3-red w3-xlarge" onclick="w3_open()">&#9776;</button>
+  <div class="w3-container">
+      {% block encabezado %}
+    <h1 class="w3-text-black w3-center" style="text-shadow:3px 3px 0 #999999">
+        <b>SNEAFERS.OBR</b></h1>
+      {% endblock %}
+
+  </div>
+</div>
+<div class="w3-container">
+   <h2>
+       <p/>
+
+   </h2>
+{% block textoabajo %}
+<div class="w3-panel w3-indigo w3-center">
+  <h3 class="w3-text-white" style="text-shadow:1px 1px 0 #234">
+
+{#<image src="https://nazarethblack.files.wordpress.com/2013/05/e48df-167697339_e3673cd327.jpg"></image>#}
+   </div>
+{% endblock %}
+  <div id="id01" class="w3-modal">
+    <div class="w3-modal-content">
+      <div class="w3-container">
+        <span onclick="document.getElementById('id01').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+        <p>
+        <a href="https://www.instagram.com/sneafers.obr/" target="_blank">sneafers.obr</a></p>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="w3-container">
+    {% block cuerpo %}
+    {% endblock %}
+</div>
+
+</div>
+
+<script>
+function w3_open() {
+  document.getElementById("main").style.marginLeft = "25%";
+  document.getElementById("mySidebar").style.width = "25%";
+  document.getElementById("mySidebar").style.display = "block";
+  document.getElementById("openNav").style.display = 'none';
+}
+function w3_close() {
+  document.getElementById("main").style.marginLeft = "0%";
+  document.getElementById("mySidebar").style.display = "none";
+  document.getElementById("openNav").style.display = "inline-block";
+}
+</script>
+
+</body>
+</html>
